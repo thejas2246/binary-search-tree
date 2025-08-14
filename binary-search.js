@@ -128,10 +128,8 @@ class Tree {
   }
 
   levelOrderForEach(callBack=null,root = this.root){
-
-
     if(callBack===null){
-      throw new Error("Cant call without callback")
+      throw new Error("Can't call without callback")
     }
     if(root==null){
       return root;
@@ -151,9 +149,18 @@ class Tree {
         }
       }
     }
+  }
 
+  inOrderForEach(callBack=null,root = this.root){
+    if(callBack==null){
+      return root
+    }
+    
+    if(root==null) return;
 
-
+    callBack(root.data)
+    this.inOrderForEach(callBack,root.left);
+    this.inOrderForEach(callBack,root.right)
   }
 }
 
@@ -173,5 +180,6 @@ test.deleteItem(9);
 test.deleteItem(23);
 test.deleteItem(67);
 
-test.levelOrderForEach(double);
+
+test.inOrderForEach(double);
 test.print()
