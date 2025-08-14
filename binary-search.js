@@ -106,6 +106,23 @@ class Tree {
     return min
   }
 
+  find(value,root = this.root){
+    if(root == null) return root;
+
+    let val
+    if(value === root.data){
+      return root;
+    }
+    else if(value<root.data){
+      val = this.find(value,root.left);
+      return val
+    }
+    else if(value>root.data){
+      val = this.find(value,root.right)
+      return val
+    }
+  }
+
   print(){
     this.prettyPrint(this.root);
   }
@@ -122,5 +139,7 @@ test.deleteItem(8)
 test.deleteItem(9);
 test.deleteItem(23);
 test.deleteItem(67);
+
+console.log(test.find(6345))
 
 test.print()
