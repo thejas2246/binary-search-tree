@@ -173,6 +173,17 @@ class Tree {
     callBack(root.data)
     this.preOrderForEach(callBack,root.right)
   }
+  postOrderForEach(callBack=null,root = this.root){
+     if(callBack==null){
+      return root
+    }
+    
+    if(root==null) return root;
+
+    this.postOrderForEach(callBack,root.left);
+    this.postOrderForEach(callBack,root.right)
+    callBack(root.data)
+  }
 }
 
 function double(value){
@@ -193,5 +204,5 @@ test.deleteItem(67);
 
 
 // test.inOrderForEach(double);
-test.preOrderForEach(double)
+test.postOrderForEach(double)
 test.print()
