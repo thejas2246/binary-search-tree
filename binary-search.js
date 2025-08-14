@@ -63,6 +63,48 @@ class Tree {
     }
     
   }
+  deleteItem(value,root = this.root){
+    if(!root){
+      return root
+    }
+    if(value>root.data){
+      root.right = this.deleteItem(value,root.right);
+    }
+    else if(value<root.data){
+     root.left = this.deleteItem(value,root.left);
+    }
+    else{
+      
+      if(!root.right && !root.left){
+        return null
+      }
+      else if(root.right ==null){
+        return root.left
+      }
+      else if(root.left == null){
+        return root.right
+      }
+      else{
+        let min = this.findMin(root.right);
+        root.data = min.data
+        root.right = this.deleteItem(min.data,root.right)
+      }
+
+    }
+
+    return root;
+  }
+
+  findMin(root){
+    let min = root;
+    while(root.left){
+      root = root.left;
+      if(root.data<min.data){
+        min = root;
+      }
+    }
+    return min
+  }
 
   print(){
     this.prettyPrint(this.root);
@@ -76,3 +118,9 @@ test.insert(31);
 test.insert(67);
 
 test.print();
+test.deleteItem(8)
+test.deleteItem(9);
+test.deleteItem(23);
+test.deleteItem(67);
+
+test.print()
