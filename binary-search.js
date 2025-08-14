@@ -162,10 +162,21 @@ class Tree {
     this.inOrderForEach(callBack,root.left);
     this.inOrderForEach(callBack,root.right)
   }
+  preOrderForEach(callBack=null,root=this.root){
+     if(callBack==null){
+      return root
+    }
+    
+    if(root==null) return root;
+
+    this.preOrderForEach(callBack,root.left);
+    callBack(root.data)
+    this.preOrderForEach(callBack,root.right)
+  }
 }
 
 function double(value){
-  console.log(value*2)
+  console.log(value*1)
 }
 
 let arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
@@ -181,5 +192,6 @@ test.deleteItem(23);
 test.deleteItem(67);
 
 
-test.inOrderForEach(double);
+// test.inOrderForEach(double);
+test.preOrderForEach(double)
 test.print()
