@@ -6,7 +6,7 @@ class Tree {
     this.arr = removeDulplicates(arr);
     mergeSort(this.arr);
     this.root = this.buildTree(this.arr);
-    this.prettyPrint(this.root)
+    
   }
 
   buildTree(arr, start = 0, end = arr.length - 1) {
@@ -126,6 +126,39 @@ class Tree {
   print(){
     this.prettyPrint(this.root);
   }
+
+  levelOrderForEach(callBack=null,root = this.root){
+
+
+    if(callBack===null){
+      throw new Error("Cant call without callback")
+    }
+    if(root==null){
+      return root;
+    }
+    let levelArray = [];
+    levelArray.push(root);
+
+    while(levelArray.length!==0){
+      let val = levelArray.shift();
+      if(val){
+        callBack(val.data)
+        if(val.left){
+          levelArray.push(val.left);
+        }
+        if(val.right){
+          levelArray.push(val.right);
+        }
+      }
+    }
+
+
+
+  }
+}
+
+function double(value){
+  console.log(value*2)
 }
 
 let arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
@@ -140,6 +173,5 @@ test.deleteItem(9);
 test.deleteItem(23);
 test.deleteItem(67);
 
-console.log(test.find(6345))
-
+test.levelOrderForEach(double);
 test.print()
