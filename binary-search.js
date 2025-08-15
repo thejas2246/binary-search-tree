@@ -1,7 +1,7 @@
 import { mergeSort } from "./merge-sort.js";
 import { removeDulplicates } from "./remove-duplicate.js";
 import { Node } from "./node.js";
-class Tree {
+export class Tree {
   constructor(arr) {
     this.arr = removeDulplicates(arr);
     mergeSort(this.arr);
@@ -242,32 +242,6 @@ class Tree {
     this.tempArr = removeDulplicates(this.tempArr);
     mergeSort(this.tempArr);
     this.root = this.buildTree(this.tempArr)
+    this.tempArr = []
   }
 }
-
-let arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
-let test = new Tree(arr)
-test.insert(27);
-test.insert(31);
-test.insert(67);
-test.insert(66666);
-test.insert(6666677);
-test.insert(66666888);
-
-
-
-
-
-
-test.print();
-test.deleteItem(8)
-test.deleteItem(9);
-test.deleteItem(23);
-test.deleteItem(67);
-console.log(test.depth(3))
-console.log(test.treeHeight())
-console.log(test.isBalanced());
-test.rebalence();
-// test.inOrderForEach(double)
-console.log(test.isBalanced());
-test.print()
