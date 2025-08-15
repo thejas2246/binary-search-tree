@@ -236,12 +236,12 @@ export class Tree {
     return this.isBalanced(root.left) && this.isBalanced(root.right);
   }
   rebalence(){
+    this.tempArr = []
     this.inOrderForEach((value)=>{
       this.tempArr.push(value)
     })
     this.tempArr = removeDulplicates(this.tempArr);
     mergeSort(this.tempArr);
     this.root = this.buildTree(this.tempArr)
-    this.tempArr = []
   }
 }
