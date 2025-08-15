@@ -201,8 +201,22 @@ class Tree {
       let lHeight = this.height(value,root.left,didFind);
       let rHeight = this.height(value,root.right,didFind)
       return Math.max(lHeight,rHeight)+1
+  }
 
+  depth(value,root = this.root,h=0){
 
+    if(root===null) return root
+
+    if(value===root.data){
+      return h
+    }
+    else if(value>root.data){
+      h = this.depth(value,root.right,h+1);
+    }
+    else if(value<root.data){
+      h =this.depth(value,root.left,h+1)
+    }
+    return h
   }
 
 }
@@ -216,12 +230,14 @@ let test = new Tree(arr)
 test.insert(27);
 test.insert(31);
 test.insert(67);
+test.insert(66666);
+
 
 test.print();
 test.deleteItem(8)
 test.deleteItem(9);
 test.deleteItem(23);
 test.deleteItem(67);
-console.log(test.height(324))
+console.log(test.depth(3))
 // test.inOrderForEach(double)
 test.print()
