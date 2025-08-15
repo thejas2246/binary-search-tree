@@ -218,6 +218,23 @@ class Tree {
     }
     return h
   }
+  treeHeight(root = this.root){
+    if(root === null) return -1;
+
+    return Math.max(this.treeHeight(root.left),this.treeHeight(root.right)) +1
+
+
+  }
+  isBalanced(root = this.root){
+    if(root==null) return true;
+
+    let lHeight = this.treeHeight(root.left);
+    let rHeight = this.treeHeight(root.right);
+
+    if(Math.abs(lHeight - rHeight)>1) return false
+
+    return this.isBalanced(root.left) && this.isBalanced(root.right);
+  }
 
 }
 
@@ -233,11 +250,16 @@ test.insert(67);
 test.insert(66666);
 
 
+
+
+
 test.print();
 test.deleteItem(8)
 test.deleteItem(9);
 test.deleteItem(23);
 test.deleteItem(67);
 console.log(test.depth(3))
+console.log(test.treeHeight())
+console.log(test.isBalanced());
 // test.inOrderForEach(double)
 test.print()
