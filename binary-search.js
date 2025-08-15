@@ -158,8 +158,8 @@ export class Tree {
     
     if(root==null) return;
 
-    callBack(root.data)
     this.inOrderForEach(callBack,root.left);
+    callBack(root.data)
     this.inOrderForEach(callBack,root.right)
   }
   preOrderForEach(callBack=null,root=this.root){
@@ -169,8 +169,8 @@ export class Tree {
     
     if(root==null) return root;
 
-    this.preOrderForEach(callBack,root.left);
     callBack(root.data)
+    this.preOrderForEach(callBack,root.left);
     this.preOrderForEach(callBack,root.right)
   }
   postOrderForEach(callBack=null,root = this.root){
