@@ -184,6 +184,27 @@ class Tree {
     this.postOrderForEach(callBack,root.right)
     callBack(root.data)
   }
+
+  height(value,root = this.root,didFind = false){
+
+    if(root==null) return -1;
+
+    if(!didFind){
+      let val = this.find(value);
+      root = val;
+      didFind = true
+      if(!val){
+        return null
+      }
+    }
+
+      let lHeight = this.height(value,root.left,didFind);
+      let rHeight = this.height(value,root.right,didFind)
+      return Math.max(lHeight,rHeight)+1
+
+
+  }
+
 }
 
 function double(value){
@@ -201,8 +222,6 @@ test.deleteItem(8)
 test.deleteItem(9);
 test.deleteItem(23);
 test.deleteItem(67);
-
-
-// test.inOrderForEach(double);
-test.postOrderForEach(double)
+console.log(test.height(324))
+// test.inOrderForEach(double)
 test.print()
