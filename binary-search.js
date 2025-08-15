@@ -6,7 +6,7 @@ class Tree {
     this.arr = removeDulplicates(arr);
     mergeSort(this.arr);
     this.root = this.buildTree(this.arr);
-    
+    this.tempArr = [];  
   }
 
   buildTree(arr, start = 0, end = arr.length - 1) {
@@ -152,8 +152,8 @@ class Tree {
   }
 
   inOrderForEach(callBack=null,root = this.root){
-    if(callBack==null){
-      return root
+     if(callBack===null){
+      throw new Error("Can't call without callback")
     }
     
     if(root==null) return;
@@ -163,8 +163,8 @@ class Tree {
     this.inOrderForEach(callBack,root.right)
   }
   preOrderForEach(callBack=null,root=this.root){
-     if(callBack==null){
-      return root
+    if(callBack===null){
+      throw new Error("Can't call without callback")
     }
     
     if(root==null) return root;
@@ -174,8 +174,8 @@ class Tree {
     this.preOrderForEach(callBack,root.right)
   }
   postOrderForEach(callBack=null,root = this.root){
-     if(callBack==null){
-      return root
+     if(callBack===null){
+      throw new Error("Can't call without callback")
     }
     
     if(root==null) return root;
@@ -235,11 +235,14 @@ class Tree {
 
     return this.isBalanced(root.left) && this.isBalanced(root.right);
   }
-
-}
-
-function double(value){
-  console.log(value*1)
+  rebalence(){
+    this.inOrderForEach((value)=>{
+      this.tempArr.push(value)
+    })
+    this.tempArr = removeDulplicates(this.tempArr);
+    mergeSort(this.tempArr);
+    this.root = this.buildTree(this.tempArr)
+  }
 }
 
 let arr = [1, 7, 4, 23, 8, 9, 4, 3, 5, 7, 9, 67, 6345, 324];
@@ -248,6 +251,9 @@ test.insert(27);
 test.insert(31);
 test.insert(67);
 test.insert(66666);
+test.insert(6666677);
+test.insert(66666888);
+
 
 
 
@@ -261,5 +267,7 @@ test.deleteItem(67);
 console.log(test.depth(3))
 console.log(test.treeHeight())
 console.log(test.isBalanced());
+test.rebalence();
 // test.inOrderForEach(double)
+console.log(test.isBalanced());
 test.print()
